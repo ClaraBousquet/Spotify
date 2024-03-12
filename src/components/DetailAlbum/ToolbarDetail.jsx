@@ -6,31 +6,52 @@ import PlayPause from '../PlayPause';
 import { AiFillHeart, AiFillInfoCircle, AiOutlineHeart, AiOutlineInfoCircle } from 'react-icons/ai';
 import { Collapse } from 'react-collapse';
 import InfoCollapse from './InfoCollapse';
+import { USER_INFOS } from '../../constants/appConstant';
+import { fetchUserFavorite } from '../../redux/user/userSlice';
+import { selectUserData } from '../../redux/user/userSelector';
 
 const ToolbarDetail = ({ dataAlbum }) => {
   //on déclare nos constantes
   const data = dataAlbum;
   const songs = dataAlbum?.songs;
+
+  // On récupère l'id de l'album
+  const albumId = dataAlbum?.id;
+
+// On récupère l'id de l'utilisateur en session
+const userId = sessionStorage.getItem(USER_INFOS) 
+? JSON.parse(localStorage.getItem(USER_INFOS)).userId
+ : null;
+
   //on déclare nos states
   const [index, setIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isInList, setIsInList] = useState(false);
+  const[listArray, setListArray] = useState([]);
+
 
   //on récupère les hooks
   const dispatch = useDispatch();
 
+
+
+
   useEffect(() => {
+    dispatch(fetchUserFavorite(userId));
     setIsLoading(false);
   }, [])
 
   //on récupère les données des slices
   const { isPlaying, activeSong } = useSelector(state => state.player);
+  const {loading, userFavorite} = useSelector(selectUserData);
+
 
   //méthode lorsqu'on met pause
   const handlePauseClick = () => {
     dispatch(playPause(false))
   }
+
 
   //méthode lorsqu'on met en lecture
   const handlePlayClick = (index) => {
@@ -39,17 +60,18 @@ const ToolbarDetail = ({ dataAlbum }) => {
     dispatch(playPause(true));
   }
 
+
   //méthode pour gérer le favorie
   const toggleFavorite = () => {
     setIsInList(!isInList);
     //TODO : enregistrer dans la base de donnée
   }
+  
 
   //méthode pour ouvrir ou fermer le collapse
   const handleCollapseClick = () => {
     setIsCollapsed(!isCollapsed);
   }
-
 
   return (
     isLoading ? <PageLoader /> :

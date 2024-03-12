@@ -16,10 +16,9 @@ const PlayPause = ({
 isPlaying && activeSong?.title === songs[index].title ?
 // si vrai: on retourne l'icone pause avec la méthode handlePause
 <BsPauseCircleFill 
-className='text-green shadow-md' onClick={handlePause} />
+className='text-green shadow-md 'size={size} onClick={handlePause} />
 :
-<BsPlayCircleFill className='text-green shadow-md' onClick={handlePlay} />
-
+<BsPlayCircleFill className='text-green shadow-md 'size={size} onClick={handlePlay} />
   )
 }
 

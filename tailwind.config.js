@@ -18,7 +18,9 @@ export default {
         green_top: 'rgba(26, 173, 78, 1)',
       },
       animation: {
-        slideup: 'slideup 1s ease-in-out'
+        slideup: 'slideup 1s ease-in-out',
+        slideup2: 'slideup 500ms ease-in-out',
+
       },
       keyframes: {
         slideup: {

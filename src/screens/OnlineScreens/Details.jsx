@@ -12,7 +12,6 @@ const dispatch = useDispatch();
 
 // On récupère l'id de l'album passé dans l'url
 const id = params.id;
-console.log(id)
 
 useEffect(()=> {
     dispatch(fetchAlbumDetail(id))

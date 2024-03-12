@@ -10,6 +10,10 @@ const Home = () => {
   //on récupère le hook useDispatch de react-redux
   const dispatch = useDispatch()
 
+  // On doit récupérer les infos du slice player
+  const { activeSong, isPlaying } = useSelector(state => state.player)
+
+
   useEffect(() => {
     dispatch(fetchAlbums()) //permet de mettre à jour les states albums et loading de albumSlice
   }, [dispatch])
@@ -29,11 +33,20 @@ const Home = () => {
           {dataAlbum && dataAlbum.map((data, index)=>{
             return(
               <AlbumCard
+
+
               //on passe key en paramètre pour que chaque enfant soit unique
               key={index}
               //on lui passe data comme props de l'album
               data={data}
-
+              // Songs: tableau de chanson
+              songs={data.songs}
+              // isPlaying: pour savoir si une chanson est en cours de lecture
+              isPlaying={isPlaying}
+              // activeSong: chanson en cours de lecture
+              activeSong={activeSong}
+              // index: index de la chanson dans le tableau de chanson
+              index={0}
               />
             )
           })}

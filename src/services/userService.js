@@ -2,7 +2,6 @@ import axios from "axios"
 import { apiUrl } from "../constants/apiConstant";
 
 export const checkUser = async (userInfo) => {
-    console.log('userInfo', userInfo);
     try {
         // On récupère l'utilisateur dans la base de données avec l'id en session
         const response = await axios.get(`${apiUrl}/users/${userInfo.userId}`);

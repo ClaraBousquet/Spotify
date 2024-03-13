@@ -17,7 +17,6 @@ useEffect(()=> {
     dispatch(fetchAlbumDetail(id))
     },[])
 const {loading, albumDetail} = useSelector(selectAlbumsData)
-console.log(albumDetail);
 return (
         loading ? <PageLoader /> :
         <DetailAlbum dataAlbum={albumDetail}/>

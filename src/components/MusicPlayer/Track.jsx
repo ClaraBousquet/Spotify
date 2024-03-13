@@ -6,7 +6,6 @@ const Track = ({isPlaying, isActive, activeSong, currentAlbum}) => {
     // on récupère l'image de l'album
 
     const imgPath = `${albumUrl}/${currentAlbum?.imagePath}`;
-console.log(imgPath);
     const title = activeSong?.title ?? 'Musique sans titre !';
     const artist = currentAlbum?.artist?.name ?? 'artiste inconnu, carrière râtée';
     const album = currentAlbum?.title ?? 'album inconnu';

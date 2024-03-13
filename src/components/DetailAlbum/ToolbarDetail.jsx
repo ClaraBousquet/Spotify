@@ -9,8 +9,10 @@ import InfoCollapse from './InfoCollapse';
 import { USER_INFOS } from '../../constants/appConstant';
 import { fetchUserFavorite } from '../../redux/user/userSlice';
 import { selectUserData } from '../../redux/user/userSelector';
+import { fetchAddRemoveFavorite } from '../../services/userFavoritesService';
 
 const ToolbarDetail = ({ dataAlbum }) => {
+
   //on déclare nos constantes
   const data = dataAlbum;
   const songs = dataAlbum?.songs;
@@ -19,7 +21,7 @@ const ToolbarDetail = ({ dataAlbum }) => {
   const albumId = dataAlbum?.id;
 
 // On récupère l'id de l'utilisateur en session
-const userId = sessionStorage.getItem(USER_INFOS) 
+const userId = localStorage.getItem(USER_INFOS) 
 ? JSON.parse(localStorage.getItem(USER_INFOS)).userId
  : null;
 
@@ -34,18 +36,27 @@ const userId = sessionStorage.getItem(USER_INFOS)
   //on récupère les hooks
   const dispatch = useDispatch();
 
+  //on récupère les données des slices
+  const { isPlaying, activeSong } = useSelector(state => state.player);
+  const {loading, userFavorite} = useSelector(selectUserData);
 
 
 
   useEffect(() => {
     dispatch(fetchUserFavorite(userId));
+    checkFavorite();
     setIsLoading(false);
   }, [])
+ 
 
-  //on récupère les données des slices
-  const { isPlaying, activeSong } = useSelector(state => state.player);
-  const {loading, userFavorite} = useSelector(selectUserData);
+const checkFavorite = () => {
+  if(userFavorite){
+    const idArray = userFavorite.map((item)=>`/api/albums/${item.id}`);
+    setListArray([...new Set(idArray)])
+    if(idArray.includes(`/api/albums/${albumId}`)) setIsInList(true);
 
+  }
+}
 
   //méthode lorsqu'on met pause
   const handlePauseClick = () => {
@@ -62,11 +73,27 @@ const userId = sessionStorage.getItem(USER_INFOS)
 
 
   //méthode pour gérer le favorie
-  const toggleFavorite = () => {
+  const toggleFavorite = async () => {
     setIsInList(!isInList);
-    //TODO : enregistrer dans la base de donnée
+    // On va créer une copie du state listArray
+    let updatedListArray = [...listArray];
+
+    if (isInList){
+      // Supprimer l'id de l'album dans le tableau
+      updatedListArray = listArray.filter((item) => item !== `/api/albums/${albumId}`);
+    }else{
+      // on ajoute l'id de l'album dans le tableau
+      updatedListArray.push(`/api/albums/${albumId}`);
+    }
+
+    // On appelle le service pour mettre a jour la liste de favoris dans la bdd
+    await fetchAddRemoveFavorite(updatedListArray, userId);
+
+    // On met à jour le state
+    setListArray
+
   }
-  
+
 
   //méthode pour ouvrir ou fermer le collapse
   const handleCollapseClick = () => {
@@ -76,8 +103,8 @@ const userId = sessionStorage.getItem(USER_INFOS)
   return (
     isLoading ? <PageLoader /> :
       <>
-        <div className='flex items-center ms-5'>
-          <div className='cursor-pointer me-3'>
+        <div className='flex items-center ml-5'>
+          <div className='cursor-pointer mr-3'>
             <PlayPause
               songs={songs}
               handlePause={handlePauseClick}

@@ -23,7 +23,7 @@ const InfoCollapse = ({ dataAlbum }) => {
         <div className='flex items-start justify-start w-[60%]'>
           <div className='flex-col' style={{ maxWidth: '80%' }}>
             <div className='p-1 m-1 flex'>
-              <RiArticleLine className='me-1' style={styleIcon} />
+              <RiArticleLine className='mr-1' style={styleIcon} />
             </div>
             <div className='p-1 m-1 pb-5'>
               {dataAlbum?.artist?.biography

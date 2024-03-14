@@ -11,6 +11,7 @@ const albumSlice = createSlice({
     loading: false,// on initialise le state loading à false pour pouvoir gérer l'attente des requetes asynchrone
     albumDetail: {},
     searchAlbum : [],
+    searchArtist : [],
   },
 
   // Reducer, methode qui permet de remplir les states (mise en rayon)
@@ -26,12 +27,15 @@ const albumSlice = createSlice({
     },
     setSearchAlbum: (state, action)=>{
       state.searchAlbum = action.payload
+    },
+    setSearchArtist: (state, action)=>{
+      state.searchArtist = action.payload
     }
   }
 });
 
 
-export const {setAlbums, setLoading, setAlbumDetail, setSearchAlbum} = albumSlice.actions;
+export const {setAlbums, setLoading, setAlbumDetail, setSearchAlbum, setSearchArtist} = albumSlice.actions;
 
 
 //on crée la méthode qui permet de récupérer les données des albums de la BDD
@@ -72,7 +76,10 @@ export const fetchSearch = (searchWord) => async dispatch => {
   try {
     dispatch(setLoading(true));
     const responseAlbums = await axios.get(`${apiUrl}/albums?page=1&title=${searchWord}&isActive=true`);
+    const responseArtist = await axios.get(`${apiUrl}/albums?page=1&artist.name=${searchWord}&isActive=true`);
     dispatch(setSearchAlbum(responseAlbums.data));
+    dispatch(setSearchArtist(responseArtist.data));
+
     dispatch(setLoading(false));
 
   } catch (error) {
@@ -80,6 +87,14 @@ export const fetchSearch = (searchWord) => async dispatch => {
     dispatch(setLoading(false));
   }
 }
+
+// on crée une méthode pour reset la recherche
+
+export const fetchResetSearch = () => async dispatch => {
+  dispatch(setSearchAlbum([]));
+  dispatch(setSearchArtist([]));
+}
+
 
 // On exporte notre reducer
 export default albumSlice.reducer;

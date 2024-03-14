@@ -6,8 +6,8 @@ import Search from "../screens/OnlineScreens/Search";
 import Library from "../screens/OnlineScreens/Library";
 import Playlist from "../screens/OnlineScreens/Playlist";
 import Wishlist from "../screens/OnlineScreens/Wishlist";
-import { BiDetail } from "react-icons/bi";
 import Details from "../screens/OnlineScreens/Details";
+import DetailArtist from "../components/DetailArtist";
 
 const OnlineRouter = createBrowserRouter([
   {
@@ -45,6 +45,10 @@ const OnlineRouter = createBrowserRouter([
       {
         path:"/detail/:id",
         element: <Details />
+      },
+      {
+        path: "/artist-detail/:id",
+        element: <DetailArtist />
       }
     ]
   }

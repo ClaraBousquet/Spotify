@@ -57,7 +57,7 @@ const durationAlbum = () => {
   return (
     isLoading ? <PageLoader/> :
     <div className='flex items-center'>
-      <Link to='#' >
+      <Link to={`/artist-detail/${dataAlbum?.artist?.id}`} >
         <img src={imgPath} alt={dataAlbum?.artist?.name ?? 'photo artiste'} className='w-10 h-10 rounded-full object-cover' />
       </Link>
       

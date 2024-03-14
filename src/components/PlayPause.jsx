@@ -13,7 +13,7 @@ const PlayPause = ({
 }) => {
   return (
     // On check si on est en play && si titre == le titre de la chanson du tableau à l'index donnée
-isPlaying && activeSong?.title === songs[index].title ?
+isPlaying && activeSong?.title === songs[index]?.title ?
 // si vrai: on retourne l'icone pause avec la méthode handlePause
 <BsPauseCircleFill 
 className='text-green shadow-md 'size={size} onClick={handlePause} />

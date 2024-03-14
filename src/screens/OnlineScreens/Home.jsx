@@ -33,8 +33,6 @@ const Home = () => {
           {dataAlbum && dataAlbum.map((data, index)=>{
             return(
               <AlbumCard
-
-
               //on passe key en paramètre pour que chaque enfant soit unique
               key={index}
               //on lui passe data comme props de l'album

@@ -40,7 +40,7 @@ dispatch(playPause(true));
           />
         </Link>
         {/* on place notre composent playpause ici */}
-        <div className={`absolute ${activeSong?.title === songs[index].title ? 'flex' : 'hidden'} group-hover:flex right-3 bottom-5`}>
+        <div className={`absolute ${activeSong?.title === songs[index]?.title ? 'flex' : 'hidden'} group-hover:flex right-3 bottom-5`}>
 <div className='group-hover:animate-slideup2 bg-black outline-none rounded-full group-hover:duration-75 overflow-hidden'>
   <PlayPause 
   songs={songs}

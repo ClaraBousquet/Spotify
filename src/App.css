@@ -28,6 +28,8 @@
   height: 220px;
 }
 
+
+
 /* collapse transition */
 .ReactCollapse--collapse {
   transition: height 1000ms;

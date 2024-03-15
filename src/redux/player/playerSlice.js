@@ -55,12 +55,13 @@ const playerSlice = createSlice({
     playPause:(state, action) => {
         state.isPlaying = action.payload;
 
-    }
+    },
+    
   }
 })
 
 // export des actions
-export const {setActiveSong, setActiveAlbum, nextSong, prevSong, playPause} = playerSlice.actions;
+export const {setActiveSong, setActiveAlbum, nextSong, prevSong, playPause, } = playerSlice.actions;
 
 // export du reducer
 export default playerSlice.reducer;

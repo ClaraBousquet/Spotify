@@ -20,8 +20,6 @@ const dataAlbum = searchAlbum['hydra:member'];
 
 // on récupère le tableau de données de searchartist
 const dataArtist = searchArtist['hydra:member'];
-console.log('aaarrrttiiistte',dataArtist);
-console.log('aaaaalbuuuumm',dataAlbum);
 
   return (
   <>

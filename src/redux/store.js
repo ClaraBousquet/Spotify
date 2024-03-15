@@ -10,7 +10,7 @@ const store = configureStore({
   albums: albumReducer,
   player: playerReducer,
   user: userReducer,
-  artist: artistReducer,
+  artists: artistReducer,
   }
 })
 

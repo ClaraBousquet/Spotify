@@ -11,8 +11,6 @@ const [searchWord, setSearchWord] = useState('');
 // On récupère le hook dispatch
 
 const dispatch = useDispatch();
-
-console.log('searchword', searchWord);
 const handleSubmit = (e) => {
     e.preventDefault();
 dispatch(fetchSearch(searchWord));

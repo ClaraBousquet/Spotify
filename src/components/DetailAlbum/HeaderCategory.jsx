@@ -8,17 +8,19 @@ const Dot = () => (
 )
   return (
    <div className='flex items-center justify-start mt-4'>
-    {categories && categories.map((category,index) => (
-index === 0 
-? <Link key={index} to='#' className='font-medium'>{category.label}</Link> 
-: <>
-<Dot />
-<Link key={index} to='#' className='font-medium'>{category.label}</Link>
-</>    
-   
-    ))}
-   </div>
-  )
+           {categories && categories.map((category,index)=>(
+            //si c'est le premier element on ne met pas de point
+            index === 0
+            ? <Link key={index} to='#' className='font-medium'>{category.label}</Link>
+            : <div className='flex' key={index}>
+                <Dot />
+               <Link  to='#' className='font-medium'>{category.label}</Link>
+                </div>
+            ))
+            }
+        </div>
+        )  
+
 }
 
 export default HeaderCategory

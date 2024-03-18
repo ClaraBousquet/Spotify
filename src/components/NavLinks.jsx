@@ -2,14 +2,14 @@ import React from 'react'
 import { dataAlbumNav, dataUserNav, styleIcon } from '../constants/appConstant'
 import { NavLink } from 'react-router-dom'
 
-const NavLinks = ({ data, marginTop, handleClick }) => (
+const NavLinks = ({ data, marginTop, handleClick, userId=0 }) => (
   <>
     <div className={marginTop}>
       {/* on va mapper sur dataAlbumNav */}
       {data.map((item) => (
         <NavLink
           key={item.title}
-          to={item.path}
+          to={item.path.replace(':id', userId)}
           end
           className="flex flex-row p-3 items-center justify-start font-medium text-sm text-white hover:bg-green_06"
           onClick={() => handleClick && handleClick()}

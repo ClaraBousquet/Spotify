@@ -2,6 +2,7 @@ import { imageUrl } from "./apiConstant";
 import { AiOutlineHome, AiOutlineSearch, AiOutlineAppstoreAdd } from 'react-icons/ai';
 import { BiLibrary } from 'react-icons/bi';
 import { MdFavoriteBorder } from 'react-icons/md';
+import { FiSettings } from 'react-icons/fi';
 
 //on construit un 1er tableau pour notre navbar
 //1 pour la gestion des albums
@@ -16,6 +17,7 @@ export const dataAlbumNav = [
 export const dataUserNav = [
   { title: 'Créer une playlist', path: '/add-playlist', icon: AiOutlineAppstoreAdd },
   { title: 'Titres likés', path: '/wishlist', icon: MdFavoriteBorder },
+  {title : 'Mon compte', path: '/account/:id', icon: FiSettings},
 ];
 
 //on récupère le chemain de notre logo

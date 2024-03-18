@@ -45,7 +45,7 @@ export const fetchAlbums = () => async dispatch => {
     //on passe le state loading à true pour signifier qu'on attend une réponse
     dispatch(setLoading(true));
 
-    const response = await axios.get(`${apiUrl}/albums?page=1&isActive=true`);
+    const response = await axios.get(`${apiUrl}/alba?page=1&isActive=true`);
     //on set les données dans le state albums
     dispatch(setAlbums(response.data));
     //on repasse le state loading a false pour signifier qu'on a fini d'attendre
@@ -62,7 +62,7 @@ export const fetchAlbumDetail = (id) => async dispatch => {
     //on passe le state loading à true pour signifier qu'on attend une réponse
     dispatch(setLoading(true));
 
-    const response = await axios.get(`${apiUrl}/albums?page=1&id=${id}&isActive=true`);
+    const response = await axios.get(`${apiUrl}/alba?page=1&id=${id}&isActive=true`);
     //on set les données dans le state albums
     dispatch(setAlbumDetail(response.data['hydra:member'][0]));
     //on repasse le state loading a false pour signifier qu'on a fini d'attendre
@@ -77,9 +77,9 @@ export const fetchAlbumDetail = (id) => async dispatch => {
 export const fetchSearch = (searchWord) => async dispatch => {
   try {
     dispatch(setLoading(true));
-    const responseAlbums = await axios.get(`${apiUrl}/albums?page=1&title=${searchWord}&isActive=true`);
+    const responseAlbums = await axios.get(`${apiUrl}/alba?page=1&title=${searchWord}&isActive=true`);
     const responseArtist = await axios.get(`${apiUrl}/artists?page=1&name=${searchWord}&albums.isActive=true`);
-    const responseTitle = await axios.get(`${apiUrl}/albums?page=1&songs.title=${searchWord}&isActive=true`);
+    const responseTitle = await axios.get(`${apiUrl}/alba?page=1&songs.title=${searchWord}&isActive=true`);
 
     dispatch(setSearchAlbum(responseAlbums.data))
     dispatch(setSearchArtist(responseArtist.data))

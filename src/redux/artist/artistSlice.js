@@ -34,7 +34,7 @@ export const fetchArtistDetail = (id) => async dispatch => {
         dispatch(setArtistDetail(response.data));
         dispatch(setLoading(false));
     } catch (error) {
-        console.log(`erroreur sur fetchArtistDetail: ${error}`);
+        console.log(`Erreur sur fetchArtistDetail: ${error}`);
         dispatch(setLoading(false));
     }
 }

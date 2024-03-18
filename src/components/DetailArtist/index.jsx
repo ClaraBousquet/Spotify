@@ -22,7 +22,6 @@ const DetailArtist = () => {
 
   
   const {artistDetail, loading} = useSelector(selectArtistData)
-  console.log('artistDetail', artistDetail)
 
   return (
     loading ? <PageLoader /> : 
